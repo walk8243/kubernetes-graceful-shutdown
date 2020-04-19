@@ -1,0 +1,2 @@
+# kubernetes-graceful-shutdown
+KubernetesのGracefulShutdownのときの動作を確認する
