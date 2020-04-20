@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: graceful-shutdown
+spec:
+  containers:
+    - name: graceful-shutdown
+      image: node:erbium
+      command:
+        - /bin/sh
+        - -c
+        - node /app/index.js
+      env:
+        - name: SLACK_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: slack-auth
+              key: token
+      volumeMounts:
+        - name: script-file
+          mountPath: /app/index.js
+  volumes:
+    - name: script-file
+      configMap:
+        name: script-file
+  restartPolicy: Never
