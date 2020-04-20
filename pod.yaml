@@ -7,9 +7,8 @@ spec:
     - name: graceful-shutdown
       image: node:erbium
       command:
-        - /bin/sh
-        - -c
-        - node /app/index.js
+        - node
+        - /app/index.js
       env:
         - name: SLACK_TOKEN
           valueFrom:
@@ -18,7 +17,7 @@ spec:
               key: token
       volumeMounts:
         - name: script-file
-          mountPath: /app/index.js
+          mountPath: /app
   volumes:
     - name: script-file
       configMap:

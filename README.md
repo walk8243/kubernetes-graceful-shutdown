@@ -2,6 +2,16 @@
 
 KubernetesのGracefulShutdownのときの動作を確認する
 
+## Slackへ送信するためのトークンを取得
+
+[Slackのアプリ一覧](https://api.slack.com/apps) から送信に使用するBotを選択してください。
+もし、送信するためのBotが無い場合は、Botを作成してください。
+
+**Add features and functionality** のメニューを開き、 **Permissions** をクリックしてください。
+
+その遷移後のページにある **OAuth Access Token** の内容をコピーしてください。
+その内容が **Slackへ送信するためのトークン** です。
+
 ## Kubernetesへのデプロイ
 
 ### ConfigMap

@@ -3,7 +3,15 @@ const https = require('https');
 writeLog();
 setInterval(() => {
 	writeLog();
-}, 5 * 1000);
+}, 10 * 1000);
+
+process
+	.on('SIGINT', () => {
+		sendSlack('Receive SIGNAL `SIGINT`.');
+	})
+	.on('SIGTERM', () => {
+		sendSlack('Receive SIGNAL `SIGTERM`.');
+	});
 
 function writeLog() {
 	const date = new Date();

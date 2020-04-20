@@ -9,14 +9,22 @@ data:
     writeLog();
     setInterval(() => {
       writeLog();
-    }, 5 * 1000);
-
+    }, 10 * 1000);
+    
+    process
+      .on('SIGINT', () => {
+        sendSlack('Receive SIGNAL `SIGINT`.');
+      })
+      .on('SIGTERM', () => {
+        sendSlack('Receive SIGNAL `SIGTERM`.');
+      });
+    
     function writeLog() {
       const date = new Date();
       console.log('Hello World!', date.toLocaleString());
       sendSlack(`[${date.toLocaleString()}] Regular message.`);
     }
-
+    
     function sendSlack(text) {
       const req = https.request('https://slack.com/api/chat.postMessage', {
         method: 'POST',
@@ -31,8 +39,7 @@ data:
         });
         res.on('end', () => {});
       });
-
+    
       req.write(JSON.stringify({ channel: 'post-message', text }));
       req.end();
     }
-  
