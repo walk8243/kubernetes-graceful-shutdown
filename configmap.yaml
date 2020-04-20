@@ -13,10 +13,16 @@ data:
     
     process
       .on('SIGINT', () => {
-        sendSlack('Receive SIGNAL `SIGINT`.');
+        sendSlack((new Date()).toLocaleString()+' Receive SIGNAL `SIGINT`.');
+        setTimeout(() => {
+          sendSlack((new Date()).toLocaleString()+' still alive.');
+        }, 1000);
       })
       .on('SIGTERM', () => {
-        sendSlack('Receive SIGNAL `SIGTERM`.');
+        sendSlack((new Date()).toLocaleString()+' Receive SIGNAL `SIGTERM`.');
+        setTimeout(() => {
+          sendSlack((new Date()).toLocaleString()+' still alive.');
+        }, 1000);
       });
     
     function writeLog() {
@@ -60,6 +66,10 @@ data:
       res.on('end', () => {});
     });
     
-    req.write(JSON.stringify({ channel: 'post-message', text: 'Kubernetes pod preStop.' }));
+    req.write(JSON.stringify({ channel: 'post-message', text: (new Date()).toLocaleString()+' Kubernetes pod preStop.' }));
     req.end();
-  
+    
+    setTimeout(() => {
+      console.log('15秒後');
+    }, 15 * 1000);
+    

@@ -14,5 +14,9 @@ const req = https.request('https://slack.com/api/chat.postMessage', {
 	res.on('end', () => {});
 });
 
-req.write(JSON.stringify({ channel: 'post-message', text: 'Kubernetes pod preStop.' }));
+req.write(JSON.stringify({ channel: 'post-message', text: (new Date()).toLocaleString()+' Kubernetes pod preStop.' }));
 req.end();
+
+setTimeout(() => {
+	console.log('15秒後');
+}, 15 * 1000);

@@ -7,10 +7,16 @@ setInterval(() => {
 
 process
 	.on('SIGINT', () => {
-		sendSlack('Receive SIGNAL `SIGINT`.');
+		sendSlack((new Date()).toLocaleString()+' Receive SIGNAL `SIGINT`.');
+		setTimeout(() => {
+			sendSlack((new Date()).toLocaleString()+' still alive.');
+		}, 1000);
 	})
 	.on('SIGTERM', () => {
-		sendSlack('Receive SIGNAL `SIGTERM`.');
+		sendSlack((new Date()).toLocaleString()+' Receive SIGNAL `SIGTERM`.');
+		setTimeout(() => {
+			sendSlack((new Date()).toLocaleString()+' still alive.');
+		}, 1000);
 	});
 
 function writeLog() {
