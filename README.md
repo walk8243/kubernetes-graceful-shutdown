@@ -1,6 +1,6 @@
-# kubernetes-graceful-shutdown
+# kubernetes-pod-delete
 
-KubernetesのGracefulShutdownのときの動作を確認する
+KubernetesのPodの削除のときの動作を確認する。
 
 ## Slackへ送信するためのトークンを取得
 
