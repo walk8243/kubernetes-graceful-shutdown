@@ -18,8 +18,15 @@ spec:
       volumeMounts:
         - name: script-file
           mountPath: /app
+      lifecycle:
+        preStop:
+          exec:
+            command:
+              - node
+              - /app/preStop.js
   volumes:
     - name: script-file
       configMap:
         name: script-file
+  terminationGracePeriodSeconds: 15
   restartPolicy: Never

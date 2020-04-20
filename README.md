@@ -32,3 +32,9 @@ kubectl create secret generic slack-auth --from-file=./token
 ```.sh
 kubectl apply -f pod.yaml
 ```
+
+## Podを削除する
+
+```.sh
+kubectl delete -f pod.yaml
+```
