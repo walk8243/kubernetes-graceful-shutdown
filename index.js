@@ -1,28 +1,32 @@
 const https = require('https');
 
 writeLog();
-setInterval(() => {
+const timer = setInterval(() => {
 	writeLog();
 }, 10 * 1000);
 
 process
 	.on('SIGINT', () => {
-		sendSlack((new Date()).toLocaleString()+' Receive SIGNAL `SIGINT`.');
-		setTimeout(() => {
-			sendSlack((new Date()).toLocaleString()+' still alive.');
-		}, 1000);
+		endProcess('SIGINT');
 	})
 	.on('SIGTERM', () => {
-		sendSlack((new Date()).toLocaleString()+' Receive SIGNAL `SIGTERM`.');
-		setTimeout(() => {
-			sendSlack((new Date()).toLocaleString()+' still alive.');
-		}, 1000);
+		endProcess('SIGTERM');
 	});
 
 function writeLog() {
 	const date = new Date();
 	console.log('Hello World!', date.toLocaleString());
 	sendSlack(`[${date.toLocaleString()}] Regular message.`);
+}
+
+function endProcess(signal = 'SIGTERM') {
+	clearInterval(timer);
+	sendSlack(`${(new Date()).toLocaleString()} Receive SIGNAL \`${signal}\`.`);
+	let i = 1;
+	setInterval(() => {
+		sendSlack(`${(new Date()).toLocaleString()} still alive(after ${i} seconds).`);
+		i++;
+	}, 1000);
 }
 
 function sendSlack(text) {
