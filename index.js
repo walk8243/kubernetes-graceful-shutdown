@@ -16,15 +16,15 @@ process
 function writeLog() {
 	const date = new Date();
 	console.log('Hello World!', date.toLocaleString());
-	sendSlack(`[${date.toLocaleString()}] Regular message.`);
+	sendSlack(`Regular message.`);
 }
 
 function endProcess(signal = 'SIGTERM') {
 	clearInterval(timer);
-	sendSlack(`${(new Date()).toLocaleString()} Receive SIGNAL \`${signal}\`.`);
+	sendSlack(`Receive SIGNAL \`${signal}\`.`);
 	let i = 1;
 	setInterval(() => {
-		sendSlack(`${(new Date()).toLocaleString()} still alive(after ${i} seconds).`);
+		sendSlack(`still alive(after ${i} seconds).`);
 		i++;
 	}, 1000);
 }

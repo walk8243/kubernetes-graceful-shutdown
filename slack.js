@@ -1,6 +1,18 @@
 const https = require('https');
 
-exports.sendSlack = function sendSlack(text) {
+const dateFormatOptions = {
+	timeZone: 'Asia/Tokyo',
+	year: 'numeric', month: '2-digit', day: '2-digit',
+	hour: '2-digit', minute: '2-digit', second: '2-digit',
+	hour12: false,
+}
+
+module.exports = {
+	sendSlack,
+	getDateString,
+};
+
+function sendSlack(text) {
 	const req = https.request('https://slack.com/api/chat.postMessage', {
 		method: 'POST',
 		headers: {
@@ -15,6 +27,11 @@ exports.sendSlack = function sendSlack(text) {
 		res.on('end', () => {});
 	});
 
-	req.write(JSON.stringify({ channel: 'post-message', text }));
+	req.write(JSON.stringify({ channel: 'post-message', text: `[${getDateString()}] ${text}` }));
 	req.end();
+}
+
+function getDateString() {
+	const now = new Date();
+	return new Intl.DateTimeFormat('ja-JP', dateFormatOptions).format(now);
 }
