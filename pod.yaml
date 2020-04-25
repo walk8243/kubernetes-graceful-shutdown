@@ -17,6 +17,7 @@ spec:
           exec:
             command:
               - node
+              - --icu-data-dir=/app/node_modules/full-icu
               - /app/preStop.js
   terminationGracePeriodSeconds: 15
   restartPolicy: Never

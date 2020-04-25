@@ -23,4 +23,4 @@ COPY --from=build-env /work/index.js .
 COPY --from=build-env /work/preStop.js .
 COPY --from=build-env /work/slack.js .
 
-CMD [ "node", "--icu-data-dir=node_modules/full-icu", "/app/index.js" ]
+CMD [ "node", "--icu-data-dir=/app/node_modules/full-icu", "/app/index.js" ]
