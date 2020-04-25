@@ -1,8 +1,8 @@
 {
-  "name": "kubernetes-graceful-shutdown",
+  "name": "kubernetes-pod-delete",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "git@github.com:walk8243/kubernetes-graceful-shutdown.git",
+  "repository": "git@github.com:walk8243/kubernetes-pod-delete.git",
   "author": "walk8243 <walk8243@gmail.com>",
   "license": "ISC"
 }
