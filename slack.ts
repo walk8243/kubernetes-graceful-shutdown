@@ -1,4 +1,4 @@
-import * as https from 'https';
+import fetch from 'node-fetch';
 
 const dateFormatOptions = {
 	timeZone: 'Asia/Tokyo',
@@ -7,23 +7,16 @@ const dateFormatOptions = {
 	hour12: false,
 }
 
-export function sendSlack(text: string) {
-	const req = https.request('https://slack.com/api/chat.postMessage', {
+export async function sendSlack(text: string) {
+	const response = await fetch('https://slack.com/api/chat.postMessage', {
+		body: JSON.stringify({ channel: 'post-message', text: `[${getDateString()}] ${text}` }),
 		method: 'POST',
 		headers: {
 			Authorization: `Bearer ${process.env['SLACK_TOKEN']}`,
 			'Content-Type': 'application/json; charset=UTF-8',
 		}
-	}, (res) => {
-		res.setEncoding('utf8');
-		res.on('data', (chunk) => {
-			console.log(chunk);
-		});
-		res.on('end', () => {});
 	});
-
-	req.write(JSON.stringify({ channel: 'post-message', text: `[${getDateString()}] ${text}` }));
-	req.end();
+	return await response.json();
 }
 
 export function getDateString() {
