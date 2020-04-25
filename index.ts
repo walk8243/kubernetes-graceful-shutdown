@@ -14,14 +14,14 @@ process
 	});
 
 function writeLog() {
-	sendSlack(`Regular message.`);
+	sendSlack(`定期ログ`);
 }
 
 function endProcess(signal = 'SIGTERM') {
 	clearInterval(timer);
-	sendSlack(`Receive SIGNAL \`${signal}\`.`);
+	sendSlack(`SIGNAL \`${signal}\` を受信しました。`);
 	let i = 0;
 	setInterval(() => {
-		sendSlack(`still alive(after ${++i} seconds).`);
+		sendSlack(`生存中（${++i}秒経過）`);
 	}, 1000);
 }
