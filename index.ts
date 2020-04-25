@@ -6,25 +6,22 @@ const timer = setInterval(() => {
 }, 10 * 1000);
 
 process
-	.on('SIGINT', () => {
+	.once('SIGINT', () => {
 		endProcess('SIGINT');
 	})
-	.on('SIGTERM', () => {
+	.once('SIGTERM', () => {
 		endProcess('SIGTERM');
 	});
 
 function writeLog() {
-	const date = new Date();
-	console.log('Hello World!', date.toLocaleString());
 	sendSlack(`Regular message.`);
 }
 
 function endProcess(signal = 'SIGTERM') {
 	clearInterval(timer);
 	sendSlack(`Receive SIGNAL \`${signal}\`.`);
-	let i = 1;
+	let i = 0;
 	setInterval(() => {
-		sendSlack(`still alive(after ${i} seconds).`);
-		i++;
+		sendSlack(`still alive(after ${++i} seconds).`);
 	}, 1000);
 }

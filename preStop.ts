@@ -3,5 +3,5 @@ import { sendSlack } from './slack';
 sendSlack('Kubernetes pod preStop.');
 
 setTimeout(() => {
-	console.log('15秒後');
+	sendSlack('15 seconds after running preStop.');
 }, 15 * 1000);
