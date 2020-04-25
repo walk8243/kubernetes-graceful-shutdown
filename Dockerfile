@@ -1,8 +1,26 @@
+FROM node:erbium AS build-env
+
+WORKDIR /work
+COPY package.json .
+COPY yarn.lock .
+RUN yarn
+
+COPY tsconfig.json .
+COPY index.ts .
+COPY preStop.ts .
+COPY slack.ts .
+RUN yarn run build
+
+
 FROM node:erbium
 
 WORKDIR /app
-COPY package.json .
-COPY index.js .
-COPY preStop.js .
+COPY --from=build-env /work/package.json .
+COPY --from=build-env /work/yarn.lock .
+RUN yarn --production
 
-CMD [ "node", "/app/index.js" ]
+COPY --from=build-env /work/index.js .
+COPY --from=build-env /work/preStop.js .
+COPY --from=build-env /work/slack.js .
+
+CMD [ "node", "--icu-data-dir=/app/node_modules/full-icu", "/app/index.js" ]
