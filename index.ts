@@ -1,4 +1,4 @@
-const sendSlack = require('./slack').sendSlack;
+import { sendSlack } from './slack';
 
 writeLog();
 const timer = setInterval(() => {

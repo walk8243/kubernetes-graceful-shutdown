@@ -1,4 +1,4 @@
-const https = require('https');
+import * as https from 'https';
 
 const dateFormatOptions = {
 	timeZone: 'Asia/Tokyo',
@@ -7,12 +7,7 @@ const dateFormatOptions = {
 	hour12: false,
 }
 
-module.exports = {
-	sendSlack,
-	getDateString,
-};
-
-function sendSlack(text) {
+export function sendSlack(text: string) {
 	const req = https.request('https://slack.com/api/chat.postMessage', {
 		method: 'POST',
 		headers: {
@@ -31,7 +26,7 @@ function sendSlack(text) {
 	req.end();
 }
 
-function getDateString() {
+export function getDateString() {
 	const now = new Date();
 	return new Intl.DateTimeFormat('ja-JP', dateFormatOptions).format(now);
 }

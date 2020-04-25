@@ -1,4 +1,4 @@
-const sendSlack = require('./slack').sendSlack;
+import { sendSlack } from './slack';
 
 sendSlack('Kubernetes pod preStop.');
 

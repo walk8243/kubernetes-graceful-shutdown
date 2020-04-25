@@ -105,5 +105,10 @@ tmp/
 temp/
 
 
+### TypeScript ###
+*.js
+*.js.map
+
+
 ### Secret ###
 token
